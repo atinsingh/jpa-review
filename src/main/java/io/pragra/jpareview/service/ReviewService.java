@@ -1,5 +1,6 @@
 package io.pragra.jpareview.service;
 
+import io.pragra.jpareview.entity.Product;
 import io.pragra.jpareview.entity.Review;
 import io.pragra.jpareview.entity.User;
 import io.pragra.jpareview.repo.ReviewRepo;
@@ -14,23 +15,40 @@ import java.util.Optional;
 public class ReviewService {
 
     private final UserService service;
+    private final ProductService productService;
     private final ReviewRepo repo;
 
-    public Review createReview(Review review, long userId){
+    public Review createReview(Review review, long userId,long prodId){
         Optional<User> userOptional = service.getById(userId);
+        Optional<Product> product = productService.getProductById(prodId);
         Review out = null;
-        if (userOptional.isPresent()) {
+        if (userOptional.isPresent() && product.isPresent()) {
             out =  repo.save(review);
             User user = userOptional.get();
             user.getReviews().add(out);
+            Product prod = product.get();
+            Optional<Review> any = prod.getReviews().stream().findAny();
             service.updateUser(user);
+            productService.updateProduct(prod);
         }
         return out;
 
     }
 
-    public Review updateReview(Review review){
-        return repo.save(review);
+    public Review updateReview(Review review, long userId,long prodId){
+        Optional<User> userOptional = service.getById(userId);
+        Optional<Product> product = productService.getProductById(prodId);
+        Review out = null;
+        if (userOptional.isPresent() && product.isPresent()) {
+            out =  repo.save(review);
+            User user = userOptional.get();
+            user.getReviews().add(out);
+            Product prod = product.get();
+            Optional<Review> any = prod.getReviews().stream().findAny();
+            service.updateUser(user);
+            productService.updateProduct(prod);
+        }
+        return out;
     }
 
     public List<Review> getAll() {

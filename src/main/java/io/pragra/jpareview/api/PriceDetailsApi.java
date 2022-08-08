@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,8 +29,8 @@ public class PriceDetailsApi {
     }
 
     @GetMapping("/price/{id}")
-    public void getPriceDetailById(@PathVariable long id) {
-        this.priceDetailsService.getById(id);
+    public Optional<PriceDetails> getPriceDetailById(@PathVariable long id) {
+       return this.priceDetailsService.getById(id);
     }
 
     @DeleteMapping("/price/{id}")

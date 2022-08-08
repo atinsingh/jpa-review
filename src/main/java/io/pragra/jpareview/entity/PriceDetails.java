@@ -3,21 +3,17 @@ package io.pragra.jpareview.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
-public class Review {
-
+public class PriceDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Date reviewDate;
+    private double costPrice;
 
-    private int star;
+    private double offer;
 
-    private String reviewText;
-
-
+    private double price;
 }

@@ -13,23 +13,23 @@ import java.util.Optional;
 public class ReviewApi {
     private final ReviewService service;
 
-    @PostMapping("/user/{id}/review")
-    public Review createOne(@RequestBody Review review, @PathVariable long id) {
-        return this.service.createReview(review, id);
+    @PostMapping("/user/{userId}/product/{prodId}/review")
+    public Review createReview(@RequestBody Review review, @PathVariable long userId, @PathVariable long prodId) {
+        return this.service.createReview(review, userId, prodId);
     }
 
-    @PutMapping("/user/{id}/review")
-    public Review update(@RequestBody Review review, @PathVariable long id) {
-        return this.service.createReview(review,id);
+    @PutMapping("/user/{userId}/product/{prodId}/review")
+    public Review updateReview(@RequestBody Review review, @PathVariable long userId, @PathVariable long prodId) {
+        return this.service.updateReview(review,userId,prodId);
     }
 
     @GetMapping("/review")
-    public List<Review> getAll() {
+    public List<Review> getAllReviews() {
         return this.service.getAll();
     }
 
     @GetMapping("/review/{id}")
-    public Optional<Review> getAll(@PathVariable long id) {
+    public Optional<Review> getReviewById(@PathVariable long id) {
         return this.service.getById(id);
     }
 

@@ -16,9 +16,6 @@ public class PriceDetails {
     private double costPrice;
 
     private double offer;
-    private double price;
 
-    public PriceDetails() {
-        this.price = this.costPrice - this.offer;
-    }
+    private double price;
 }

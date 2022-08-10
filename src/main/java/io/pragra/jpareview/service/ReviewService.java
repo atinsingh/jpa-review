@@ -1,5 +1,6 @@
 package io.pragra.jpareview.service;
 
+import io.pragra.jpareview.entity.Product;
 import io.pragra.jpareview.entity.Review;
 import io.pragra.jpareview.entity.User;
 import io.pragra.jpareview.repo.ReviewRepo;
@@ -13,17 +14,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReviewService {
 
-    private final UserService service;
+    private final ProductService service;
     private final ReviewRepo repo;
 
     public Review createReview(Review review, long userId){
-        Optional<User> userOptional = service.getById(userId);
+        Optional<Product> optionalProduct = service.getById(userId);
         Review out = null;
-        if (userOptional.isPresent()) {
+        if (optionalProduct.isPresent()) {
             out =  repo.save(review);
-            User user = userOptional.get();
-            user.getReviews().add(out);
-            service.updateUser(user);
+           Product product = optionalProduct.get();
+            product.getReviews().add(out);
+            service.updateProduct(product, userId);
         }
         return out;
 

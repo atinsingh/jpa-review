@@ -13,12 +13,12 @@ import java.util.Optional;
 public class ReviewApi {
     private final ReviewService service;
 
-    @PostMapping("/user/{id}/review")
+    @PostMapping("/product/review/{id}")
     public Review createOne(@RequestBody Review review, @PathVariable long id) {
         return this.service.createReview(review, id);
     }
 
-    @PutMapping("/user/{id}/review")
+    @PutMapping("/product/review/{id}")
     public Review update(@RequestBody Review review, @PathVariable long id) {
         return this.service.createReview(review,id);
     }

@@ -23,6 +23,10 @@ public class User {
     private String secretName;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Review> reviews = new java.util.ArrayList<>();
 
+    private List<Product> products = new java.util.ArrayList<>();
+
+    public List<Product> getAllProducts(){
+        return products;
+    }
 }
